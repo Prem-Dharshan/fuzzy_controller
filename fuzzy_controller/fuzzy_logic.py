@@ -1,5 +1,6 @@
 import numpy as np
 
+
 # Membership Functions
 def triangular(x, a, b, c):
     if a < x < b:
@@ -7,6 +8,7 @@ def triangular(x, a, b, c):
     if b <= x < c:
         return (c - x) / (c - b)
     return 0
+
 
 def trapezoidal(x, a, b, c, d):
     if a < x < b:
@@ -17,8 +19,10 @@ def trapezoidal(x, a, b, c, d):
         return (d - x) / (d - c)
     return 0
 
+
 def get_membership(x, fuzzy_set):
     return trapezoidal(x, *fuzzy_set) if len(fuzzy_set) == 4 else triangular(x, *fuzzy_set)
+
 
 # Fuzzy Sets
 FUZZY_SETS = {
@@ -31,12 +35,15 @@ RULES = {
     5: ["PS", "NS", "NS"], 6: ["PL", "ZE", "NL"], 7: ["ZE", "NS", "PS"], 8: ["ZE", "NM", "PM"]
 }
 
+
 def fuzzify(value, sets):
     return {k: get_membership(value, v) for k, v in sets.items()}
+
 
 def apply_rules(speed_fuzzy, accel_fuzzy):
     return {i: (min(speed_fuzzy[s], accel_fuzzy[a]), o) for i, (s, a, o) in RULES.items() if
             min(speed_fuzzy[s], accel_fuzzy[a]) > 0}
+
 
 def calculate_areas(rule_strengths):
     areas, weighted_areas = {}, {}
@@ -53,6 +60,7 @@ def calculate_areas(rule_strengths):
         areas[i] = area
         weighted_areas[i] = area * center
     return areas, weighted_areas
+
 
 def defuzzify(areas, weighted_areas):
     total_area = sum(areas.values())

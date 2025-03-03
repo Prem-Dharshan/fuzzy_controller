@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fuzzy-controller"
-version = "0.1.0"
+version = "0.1.1"
 description = "A simple fuzzy logic controller for speed and acceleration"
 authors = [{name = "DPD", email = "whizzkid.dpd@gmail.com"}]
 license = {file = "LICENSE"}
